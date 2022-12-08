@@ -4,6 +4,12 @@ import 'package:get/get.dart';
 import 'pages/homepage.dart';
 // import 'package:tracking/backend/models/devices.dart';
 
+// import 'package:telephony/telephony.dart';
+
+// void backgrounMessageHandler(SmsMessage message) async {
+//   //Handle background message
+// }
+
 void main() {
   runApp(const MyApp());
 }

@@ -36,6 +36,6 @@ List<ActionsModel> allActions = [
     action: "Send SMS to 255679190720",
     code: "AS1234*269#P#",
     icon: const Icon(Icons.edit),
-    phone: "255679190720",
+    phone: "0625789316",
   ),
 ];
