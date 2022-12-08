@@ -62,7 +62,7 @@ class _SingleDeviceState extends State<SingleDevice> {
 
                 telephony.sendSms(
                   to: data[index].phone,
-                  message: "May the force be with you!",
+                  message: data[index].code,
                   statusListener: listener,
                 );
 
