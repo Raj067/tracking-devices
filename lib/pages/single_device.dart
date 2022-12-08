@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../backend/models/actions.dart';
 import '../backend/models/devices.dart';
+import 'devices/send_sms.dart';
 
 class SingleDevice extends StatelessWidget {
   final Devices device;
@@ -8,13 +9,6 @@ class SingleDevice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // List<ActionsModel> data = List<ActionsModel>.generate(
-    //   15,
-    //   (index) => ActionsModel(
-    //       action: 'Action $index',
-    //       code: "Code $index",
-    //       icon: const Icon(Icons.color_lens)),
-    // );
     List<ActionsModel> data = allActions;
 
     return Scaffold(
@@ -31,6 +25,7 @@ class SingleDevice extends StatelessWidget {
             leading: data[index].icon,
             onTap: () {
               // Get.to(const SingleDevice());
+              sendSms(data[index]);
             },
           );
         },
