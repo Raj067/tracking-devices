@@ -27,9 +27,9 @@ List<ActionsModel> allActions = [
     code: "AS1234*269#P#",
     icon: const Icon(Icons.edit),
   ),
-  ActionsModel(
-    action: "Send SMS to 255679190720",
-    code: "AS1234*269#P#",
-    icon: const Icon(Icons.edit),
-  ),
+  // ActionsModel(
+  //   action: "Send SMS to 255679190720",
+  //   code: "AS1234*269#P#",
+  //   icon: const Icon(Icons.edit),
+  // ),
 ];

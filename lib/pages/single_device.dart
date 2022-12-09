@@ -21,24 +21,26 @@ class _SingleDeviceState extends State<SingleDevice> {
     telephony.listenIncomingSms(
         onNewMessage: (SmsMessage message) {
           // Handle message
+          message.address!.endsWith(widget.device.phone)
+              ? setState(() {
+                  Get.isSnackbarOpen ? Get.closeCurrentSnackbar() : true;
 
-          setState(() {
-            Get.isSnackbarOpen ? Get.closeCurrentSnackbar() : true;
-            Get.snackbar(
-              "Response from ${message.address}",
-              message.body!,
-              icon: const Icon(Icons.message),
-              duration: const Duration(seconds: 60),
-              backgroundColor: Theme.of(context).primaryColor.withAlpha(50),
-              snackPosition: SnackPosition.BOTTOM,
-              margin: const EdgeInsets.all(15),
-              dismissDirection: DismissDirection.horizontal,
-            );
-          });
-
+                  Get.snackbar(
+                    "Response from ${message.address}",
+                    "RESPONSE: ${message.body!}\nDevice: ${widget.device.device}\nPhone: ${widget.device.phone}",
+                    // icon: const Icon(Icons.message),
+                    duration: const Duration(seconds: 60),
+                    backgroundColor:
+                        Theme.of(context).primaryColor.withAlpha(50),
+                    snackPosition: SnackPosition.BOTTOM,
+                    margin: const EdgeInsets.all(15),
+                    dismissDirection: DismissDirection.horizontal,
+                  );
+                })
+              : true;
           print(message.body);
-          print(message.address);
-          print(widget.device);
+          print(message.address!.endsWith(widget.device.phone));
+          print(widget.device.phone);
         },
         listenInBackground: false);
 
@@ -72,8 +74,8 @@ class _SingleDeviceState extends State<SingleDevice> {
                   // Handle the status
                   Get.isSnackbarOpen ? Get.closeCurrentSnackbar() : true;
                   Get.snackbar(
-                    "Message to ${widget.device.phone}",
-                    "STATUS: ${status.name} \nCODE: ${data[index].code}\nRESPONSE: Waiting",
+                    "Message to ${widget.device.device}",
+                    "ACTION: ${data[index].action}\nSTATUS: ${status.name}\nCODE: ${data[index].code}\nDevice: ${widget.device.device}\nPhone: ${widget.device.phone}\nRESPONSE: Waiting",
                     icon: const Icon(Icons.notifications),
                     duration: const Duration(seconds: 60),
                     // ignore: use_build_context_synchronously
