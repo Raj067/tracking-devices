@@ -15,8 +15,36 @@ class SingleDevice extends StatefulWidget {
 
 class _SingleDeviceState extends State<SingleDevice> {
   final Telephony telephony = Telephony.instance;
-  String? msg;
-  String status = "";
+
+  @override
+  void initState() {
+    telephony.listenIncomingSms(
+        onNewMessage: (SmsMessage message) {
+          // Handle message
+
+          setState(() {
+            Get.isSnackbarOpen ? Get.closeCurrentSnackbar() : true;
+            Get.snackbar(
+              "Response from ${message.address}",
+              message.body!,
+              icon: const Icon(Icons.message),
+              duration: const Duration(seconds: 60),
+              backgroundColor: Theme.of(context).primaryColor.withAlpha(50),
+              snackPosition: SnackPosition.BOTTOM,
+              margin: const EdgeInsets.all(15),
+              dismissDirection: DismissDirection.horizontal,
+            );
+          });
+
+          print(message.body);
+          print(message.address);
+          print(widget.device);
+        },
+        listenInBackground: false);
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     List<ActionsModel> data = allActions;
@@ -36,73 +64,31 @@ class _SingleDeviceState extends State<SingleDevice> {
             onTap: () async {
               bool? permissionsGranted =
                   await telephony.requestPhoneAndSmsPermissions;
-              if (data[index].phone != "" && permissionsGranted!) {
+              if (permissionsGranted!) {
                 // if permission granted
 
                 // ignore: prefer_function_declarations_over_variables
-                final SmsSendStatusListener listener = (SendStatus status1) {
+                final SmsSendStatusListener listener = (SendStatus status) {
                   // Handle the status
-                  // print("The status is: $status");
-                  setState(() {
-                    status = status1.name;
-                  });
+                  Get.isSnackbarOpen ? Get.closeCurrentSnackbar() : true;
+                  Get.snackbar(
+                    "Message to ${widget.device.phone}",
+                    "STATUS: ${status.name} \nCODE: ${data[index].code}\nRESPONSE: Waiting",
+                    icon: const Icon(Icons.notifications),
+                    duration: const Duration(seconds: 60),
+                    // ignore: use_build_context_synchronously
+                    backgroundColor:
+                        Theme.of(context).primaryColor.withAlpha(50),
+                    snackPosition: SnackPosition.BOTTOM,
+                    margin: const EdgeInsets.all(15),
+                    dismissDirection: DismissDirection.horizontal,
+                  );
                 };
 
-                // Receive new message
-                telephony.listenIncomingSms(
-                    onNewMessage: (SmsMessage message) {
-                      // Handle message
-                      print(message.body);
-                      print(message.address);
-                      setState(() {
-                        msg = message.body;
-                      });
-                    },
-                    listenInBackground: false);
-
                 telephony.sendSms(
-                  to: data[index].phone,
+                  to: widget.device.phone,
                   message: data[index].code,
                   statusListener: listener,
-                );
-
-                // botom sheet
-                Get.bottomSheet(
-                  // backgroundColor: Theme.of(context).cardColor,
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-                    child: Material(
-                      // ignore: use_build_context_synchronously
-                      color: Theme.of(context).cardColor,
-                      clipBehavior: Clip.antiAlias,
-                      borderRadius: BorderRadius.circular(15),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 10),
-                            Center(
-                              child: Text(
-                                msg == null ? 'Please wait...' : "Done",
-                                style: const TextStyle(fontSize: 20),
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                            status != ""
-                                ? Text("STATUS: $status")
-                                : const SizedBox(height: 10),
-                            const SizedBox(height: 10),
-                            msg != null
-                                ? Text("RESPONSE: ${msg!}")
-                                : const Text("RESPONSE: No Response"),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  isDismissible: false,
-                  enableDrag: true,
                 );
               }
             },

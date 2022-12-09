@@ -1,7 +1,7 @@
 class Devices {
-  // int id;
+  String phone;
   int device;
-  Devices({required this.device});
+  Devices({required this.device, required this.phone});
 }
 
 List<int> listID = [
@@ -26,4 +26,9 @@ List<int> listID = [
   8049163543,
 ];
 
-List<Devices> listDevices = listID.map((e) => Devices(device: e)).toList();
+List<Devices> listDevices = listID
+    .map((e) => Devices(
+          device: e,
+          phone: "0625789316",
+        ))
+    .toList();
