@@ -20,16 +20,16 @@ List<ActionsModel> allActions = [
   ActionsModel(
     action: "Check version",
     code: "AS1234*269#V#",
-    icon: const Icon(Icons.edit),
+    icon: const Icon(Icons.vertical_shades),
   ),
   ActionsModel(
     action: "Query authorized number",
     code: "AS1234*269#P#",
-    icon: const Icon(Icons.edit),
+    icon: const Icon(Icons.open_in_browser),
   ),
-  // ActionsModel(
-  //   action: "Send SMS to 255679190720",
-  //   code: "AS1234*269#P#",
-  //   icon: const Icon(Icons.edit),
-  // ),
+  ActionsModel(
+    action: "Unlock device",
+    code: "AS1234*269#8,888888#",
+    icon: const Icon(Icons.open_in_full),
+  ),
 ];
