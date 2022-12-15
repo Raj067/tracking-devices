@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'devices/devices_list.dart';
+import 'privacy.dart';
 import 'search_devices.dart';
 import 'settings.dart';
 
@@ -25,6 +26,14 @@ class Homepage extends StatelessWidget {
               Icons.search,
             ),
           ),
+          IconButton(
+            onPressed: () {
+              Get.to(const SearchDevice());
+            },
+            icon: const Icon(
+              Icons.refresh,
+            ),
+          ),
           PopupMenuButton(
             icon: const Icon(Icons.more_vert),
             itemBuilder: (BuildContext context) => <PopupMenuEntry>[
@@ -41,26 +50,17 @@ class Homepage extends StatelessWidget {
                       Get.to(const Settings());
                     }),
               ),
-              // PopupMenuItem(
-              //   child: GestureDetector(
-              //     child: const Text(
-              //       'Settings',
-              //     ),
-              //     onTap: () {
-              //       Get.back();
-              //       Get.to(const Settings());
-              //     },
-              //   ),
-              // ),
-              const PopupMenuItem(
+              PopupMenuItem(
                 child: ListTile(
-                  contentPadding: EdgeInsets.all(0),
-                  // leading: Icon(Icons.privacy_tip),
-                  minVerticalPadding: 0,
-                  minLeadingWidth: 0,
-                  // horizontalTitleGap: 0,
-                  title: Text('Privacy'),
-                ),
+                    contentPadding: const EdgeInsets.all(0),
+                    minVerticalPadding: 0,
+                    minLeadingWidth: 0,
+                    // horizontalTitleGap: 0, PrivacyPage
+                    title: const Text('Privacy'),
+                    onTap: () {
+                      Get.back();
+                      Get.to(const PrivacyPage());
+                    }),
               ),
               const PopupMenuDivider(),
               const PopupMenuItem(child: Text('Version 1.0.0')),

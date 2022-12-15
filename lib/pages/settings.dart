@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project/pages/login.dart';
 
 class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);
@@ -30,6 +31,12 @@ class Settings extends StatelessWidget {
                     : ThemeData.dark(),
               );
             },
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Get.to(const Login());
+            },
+            child: const Text("Login"),
           ),
         ],
       ),

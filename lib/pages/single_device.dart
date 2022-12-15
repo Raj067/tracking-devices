@@ -38,9 +38,9 @@ class _SingleDeviceState extends State<SingleDevice> {
                   );
                 })
               : true;
-          print(message.body);
-          print(message.address!.endsWith(widget.device.phone));
-          print(widget.device.phone);
+          // print(message.body);
+          // print(message.address!.endsWith(widget.device.phone));
+          // print(widget.device.phone);
         },
         listenInBackground: false);
 
