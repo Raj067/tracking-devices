@@ -2,13 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../backend/controllers/controller_home.dart';
+import '../../backend/models/actions.dart';
 import '../../backend/models/types.dart';
 import '../device_details.dart';
 import '../single_device.dart';
 
 class DevicesList extends StatelessWidget {
-  const DevicesList({Key? key, required this.deviceType}) : super(key: key);
+  const DevicesList({
+    Key? key,
+    required this.deviceType,
+    required this.action,
+  }) : super(key: key);
   final TypesDevices deviceType;
+  final ActionsModel action;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +26,11 @@ class DevicesList extends StatelessWidget {
             return ListTile(
               onTap: () {
                 // Get.to(SingleDevice(device: controller.devices[index]));
-                Get.to(DevicesDetails(device: controller.devices[index], deviceType:deviceType));
+                Get.to(DevicesDetails(
+                  device: controller.devices[index],
+                  deviceType: deviceType,
+                  action: action,
+                ));
               },
               title: Text(
                 "${controller.devices[index].device}",

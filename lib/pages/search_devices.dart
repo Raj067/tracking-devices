@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../backend/controllers/controller_home.dart';
+import '../backend/models/actions.dart';
 import '../backend/models/types.dart';
 import 'devices/devices_list.dart';
 
 class SearchDevice extends StatelessWidget {
-  const SearchDevice({Key? key, required this.deviceType}) : super(key: key);
+  const SearchDevice({
+    Key? key,
+    required this.deviceType,
+    required this.action,
+  }) : super(key: key);
   final TypesDevices deviceType;
+  final ActionsModel action;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +32,10 @@ class SearchDevice extends StatelessWidget {
             }),
         elevation: 0,
       ),
-      body: DevicesList(deviceType: deviceType),
+      body: DevicesList(
+        deviceType: deviceType,
+        action: action,
+      ),
     );
   }
 }

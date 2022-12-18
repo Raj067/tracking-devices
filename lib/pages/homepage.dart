@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../backend/models/actions.dart';
 import '../backend/models/types.dart';
 import 'devices/devices_list.dart';
 import 'privacy.dart';
@@ -8,8 +9,10 @@ import 'search_devices.dart';
 import 'settings.dart';
 
 class Homepage extends StatelessWidget {
-  const Homepage({Key? key, required this.deviceType}) : super(key: key);
+  const Homepage({Key? key, required this.deviceType, required this.action})
+      : super(key: key);
   final TypesDevices deviceType;
+  final ActionsModel action;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +25,7 @@ class Homepage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Get.to(SearchDevice(deviceType: deviceType));
+              Get.to(SearchDevice(deviceType: deviceType, action: action));
             },
             icon: const Icon(
               Icons.search,
@@ -81,7 +84,10 @@ class Homepage extends StatelessWidget {
           ),
         ],
       ),
-      body: DevicesList(deviceType: deviceType),
+      body: DevicesList(
+        deviceType: deviceType,
+        action: action,
+      ),
     );
   }
 }

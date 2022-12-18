@@ -16,7 +16,7 @@ class SelectActions extends StatelessWidget {
         elevation: 0,
       ),
       body: ListView.builder(
-        padding: const EdgeInsets.fromLTRB(30, 0, 30, 5),
+        padding: const EdgeInsets.fromLTRB(30, 5, 30, 5),
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
@@ -32,6 +32,7 @@ class SelectActions extends StatelessWidget {
               onTap: () {
                 Get.to(Homepage(
                   deviceType: deviceType,
+                  action: allActions[index],
                 ));
               },
             ),
