@@ -5,7 +5,6 @@ import '../../backend/controllers/controller_home.dart';
 import '../../backend/models/actions.dart';
 import '../../backend/models/types.dart';
 import '../device_details.dart';
-import '../single_device.dart';
 
 class DevicesList extends StatelessWidget {
   const DevicesList({
