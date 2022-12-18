@@ -76,32 +76,30 @@ class DevicesTypeList extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: Container(
+            child: ListView.builder(
               padding: const EdgeInsets.fromLTRB(30, 0, 30, 5),
-              child: ListView.builder(
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-                    child: ListTile(
-                      title: Text(
-                        allTypesDevices[index].name,
-                      ),
-                      tileColor: Theme.of(context).primaryColor.withAlpha(50),
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(20),
-                        ),
-                      ),
-                      onTap: () {
-                        Get.to(SelectActions(
-                          deviceType: allTypesDevices[index],
-                        ));
-                      },
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                  child: ListTile(
+                    title: Text(
+                      allTypesDevices[index].name,
                     ),
-                  );
-                },
-                itemCount: allTypesDevices.length,
-              ),
+                    tileColor: Theme.of(context).primaryColor.withAlpha(50),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(20),
+                      ),
+                    ),
+                    onTap: () {
+                      Get.to(SelectActions(
+                        deviceType: allTypesDevices[index],
+                      ));
+                    },
+                  ),
+                );
+              },
+              itemCount: allTypesDevices.length,
             ),
           ),
         ],
