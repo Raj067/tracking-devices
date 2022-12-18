@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../backend/models/types.dart';
-import 'homepage.dart';
+import 'select_action.dart';
 
 class DevicesTypeList extends StatelessWidget {
   const DevicesTypeList({Key? key}) : super(key: key);
@@ -82,7 +82,9 @@ class DevicesTypeList extends StatelessWidget {
                         ),
                       ),
                       onTap: () {
-                        Get.to(const Homepage());
+                        Get.to(SelectActions(
+                          deviceType: allTypesDevices[index],
+                        ));
                       },
                     ),
                   );

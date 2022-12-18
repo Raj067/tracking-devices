@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../backend/models/types.dart';
 import 'devices/devices_list.dart';
 import 'privacy.dart';
 import 'search_devices.dart';
 import 'settings.dart';
 
 class Homepage extends StatelessWidget {
-  const Homepage({Key? key}) : super(key: key);
+  const Homepage({Key? key, required this.deviceType}) : super(key: key);
+  final TypesDevices deviceType;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Tracking Devices",
+          "Select Devices",
         ),
         elevation: 0,
         actions: [
           IconButton(
             onPressed: () {
-              Get.to(const SearchDevice());
+              Get.to(SearchDevice(deviceType: deviceType));
             },
             icon: const Icon(
               Icons.search,
@@ -79,46 +81,7 @@ class Homepage extends StatelessWidget {
           ),
         ],
       ),
-      body: const DevicesList(),
-      // drawer: Drawer(
-      //   child: ListView(
-      //     padding: EdgeInsets.zero,
-      //     children: [
-      //       UserAccountsDrawerHeader(
-      //         currentAccountPicture: const CircleAvatar(
-      //           backgroundImage: NetworkImage(
-      //               'https://images.unsplash.com/photo-1485290334039-a3c69043e517?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyOTU3NDE0MQ&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=300'),
-      //         ),
-      //         accountEmail: const Text('jane.doe@example.com'),
-      //         accountName: const Text(
-      //           'Jane Doe',
-      //           style: TextStyle(fontSize: 24.0),
-      //         ),
-      //         decoration: BoxDecoration(
-      //           color: Theme.of(context).primaryColor,
-      //         ),
-      //       ),
-      //       ListTile(
-      //         leading: const Icon(Icons.settings),
-      //         title: const Text(
-      //           'Settings',
-      //         ),
-      //         onTap: () {
-      //           Get.to(const Settings());
-      //         },
-      //       ),
-      //       ListTile(
-      //         leading: const Icon(Icons.apartment),
-      //         title: const Text(
-      //           'Apartments',
-      //         ),
-      //         onTap: () {
-      //           //
-      //         },
-      //       ),
-      //     ],
-      //   ),
-      // ),
+      body: DevicesList(deviceType: deviceType),
     );
   }
 }
