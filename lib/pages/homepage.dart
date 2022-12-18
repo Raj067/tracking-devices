@@ -28,10 +28,21 @@ class Homepage extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              Get.to(const SearchDevice());
+              Get.isSnackbarOpen ? Get.closeCurrentSnackbar() : true;
+              Get.snackbar(
+                "Syncronization",
+                "Syncronizing database",
+                icon: const Icon(Icons.sync),
+                duration: const Duration(seconds: 60),
+                // ignore: use_build_context_synchronously
+                backgroundColor: Theme.of(context).primaryColor.withAlpha(50),
+                snackPosition: SnackPosition.BOTTOM,
+                margin: const EdgeInsets.all(15),
+                dismissDirection: DismissDirection.horizontal,
+              );
             },
             icon: const Icon(
-              Icons.refresh,
+              Icons.sync,
             ),
           ),
           PopupMenuButton(

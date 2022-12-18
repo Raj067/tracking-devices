@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'homepage.dart';
+import 'device_type.dart';
+// import 'homepage.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
@@ -37,7 +38,7 @@ class Login extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     Get.to(
-                      const Homepage(),
+                      const DevicesTypeList(),
                     );
                   },
                   child: const Text("Login"),

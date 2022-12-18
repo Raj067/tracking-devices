@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'pages/homepage.dart';
+import 'pages/login.dart';
 // import 'package:tracking/backend/models/devices.dart';
 
 // import 'package:telephony/telephony.dart';
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.brown,
       ),
       debugShowCheckedModeBanner: false,
-      home: const Homepage(),
+      home: const Login(),
     );
   }
 }
