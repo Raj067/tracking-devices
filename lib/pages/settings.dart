@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project/pages/login.dart';
 
 class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);
@@ -17,7 +16,6 @@ class Settings extends StatelessWidget {
           ListTile(
             title: const Text("Theme Settings"),
             subtitle: const Text("Change to dark or light mode"),
-            // trailing: Icon(Icons.arrow_forward),
             leading: const Icon(
               Icons.color_lens,
             ),
@@ -32,11 +30,26 @@ class Settings extends StatelessWidget {
               );
             },
           ),
-          ElevatedButton(
-            onPressed: () {
-              Get.to(const Login());
+          ListTile(
+            title: const Text("Syncronization"),
+            subtitle: const Text("Syncronize the online data"),
+            leading: const Icon(
+              Icons.sync,
+            ),
+            onTap: () {
+              Get.isSnackbarOpen ? Get.closeCurrentSnackbar() : true;
+              Get.snackbar(
+                "Syncronization",
+                "Syncronizing database",
+                icon: const Icon(Icons.sync),
+                duration: const Duration(seconds: 60),
+                // ignore: use_build_context_synchronously
+                backgroundColor: Theme.of(context).primaryColor.withAlpha(50),
+                snackPosition: SnackPosition.BOTTOM,
+                margin: const EdgeInsets.all(15),
+                dismissDirection: DismissDirection.horizontal,
+              );
             },
-            child: const Text("Login"),
           ),
         ],
       ),

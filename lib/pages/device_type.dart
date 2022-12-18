@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../backend/models/types.dart';
 import 'select_action.dart';
+import 'settings.dart';
 
 class DevicesTypeList extends StatelessWidget {
   const DevicesTypeList({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class DevicesTypeList extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              // Get.to(SearchDevice(deviceType: deviceType, action: action));
+              Get.to(const Settings());
             },
             icon: const Icon(
               Icons.settings,
