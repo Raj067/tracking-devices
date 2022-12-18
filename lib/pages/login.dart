@@ -27,14 +27,19 @@ class Login extends StatelessWidget {
                 Positioned(
                   left: 0,
                   right: 0,
+                  top: -2,
                   child: Container(
-                      height: 100, color: Theme.of(context).primaryColor),
+                    height: 100,
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
                 Positioned(
                   // top: 10,
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                     child: Card(
+                      // semanticContainer: false,
+                      // margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                       child: Padding(
                         padding: const EdgeInsets.all(20),
                         child: Column(
