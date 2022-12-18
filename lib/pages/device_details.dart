@@ -27,7 +27,7 @@ class DevicesDetails extends StatelessWidget {
           Container(
             // height: 100,
             decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor.withAlpha(50),
+              color: Theme.of(context).primaryColor.withAlpha(0),
               borderRadius: const BorderRadius.all(
                 Radius.circular(30),
               ),
@@ -35,7 +35,7 @@ class DevicesDetails extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     "DEVICE TYPE: ${deviceType.name}",
@@ -43,17 +43,24 @@ class DevicesDetails extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
+                  const SizedBox(height: 5),
                   Text(
                     "DEVICE ID: ${device.device}",
                     style: const TextStyle(
                       fontWeight: FontWeight.w500,
                     ),
                   ),
+                  const SizedBox(height: 5),
                   Text(
                     "ACTION: ${action.action}",
                     style: const TextStyle(
                       fontWeight: FontWeight.w500,
                     ),
+                  ),
+                  const SizedBox(height: 10),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: const Text("SEND REQUEST"),
                   ),
                 ],
               ),

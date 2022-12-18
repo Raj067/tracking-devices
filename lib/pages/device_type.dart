@@ -11,9 +11,19 @@ class DevicesTypeList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Devices Logo"),
-        elevation: 0,
+        title: const Text("Devices Logo"), elevation: 0,
         // backgroundColor: Theme.of(context).primaryColor.withAlpha(0),
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+            onPressed: () {
+              // Get.to(SearchDevice(deviceType: deviceType, action: action));
+            },
+            icon: const Icon(
+              Icons.settings,
+            ),
+          ),
+        ],
       ),
       body: Column(
         children: [
