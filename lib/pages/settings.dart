@@ -23,7 +23,7 @@ class Settings extends StatelessWidget {
               Get.changeTheme(
                 Get.isDarkMode
                     ? ThemeData(
-                        primarySwatch: Colors.brown,
+                        primarySwatch: Colors.blue,
                         // useMaterial3: true,
                       )
                     : ThemeData.dark(),

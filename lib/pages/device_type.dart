@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 
 import '../backend/models/types.dart';
 import 'select_action.dart';
-import 'settings.dart';
+// import 'settings.dart';
 
 class DevicesTypeList extends StatelessWidget {
   const DevicesTypeList({Key? key}) : super(key: key);
@@ -12,25 +12,30 @@ class DevicesTypeList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Devices Tracking"), elevation: 0,
-        // backgroundColor: Theme.of(context).primaryColor.withAlpha(0),
-        automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Get.to(const Settings());
-            },
-            icon: const Icon(
-              Icons.settings,
-            ),
-          ),
-        ],
-      ),
+      // appBar: AppBar(
+      //   // title: const Text("Devices Tracking"),
+      //   elevation: 0,
+      //   backgroundColor: Theme.of(context).primaryColor.withAlpha(0),
+      //   automaticallyImplyLeading: false,
+      //   actions: [
+      //     IconButton(
+      //       onPressed: () {
+      //         Get.to(const Settings());
+      //       },
+      //       icon: const Icon(
+      //         Icons.settings,
+      //       ),
+      //     ),
+      //   ],
+      // ),
+      backgroundColor: Theme.of(context).cardColor,
+      // bottomNavigationBar: ,
       body: Column(
         children: [
+          const SizedBox(height: 50),
+          Image.asset("assets/logo.jpg"),
           Padding(
-            padding: const EdgeInsets.fromLTRB(30, 30, 30, 30),
+            padding: const EdgeInsets.fromLTRB(30, 0, 30, 30),
             child: Container(
               // height: 100,
               decoration: BoxDecoration(
