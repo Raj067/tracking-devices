@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../backend/models/types.dart';
 import 'select_action.dart';
@@ -12,7 +13,7 @@ class DevicesTypeList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Devices Logo"), elevation: 0,
+        title: const Text("Devices Tracking"), elevation: 0,
         // backgroundColor: Theme.of(context).primaryColor.withAlpha(0),
         automaticallyImplyLeading: false,
         actions: [
@@ -42,8 +43,8 @@ class DevicesTypeList extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: const [
-                    Text(
+                  children: [
+                    const Text(
                       "Welcome Back!",
                       style: TextStyle(
                         fontSize: 18,
@@ -53,10 +54,11 @@ class DevicesTypeList extends StatelessWidget {
                     Align(
                       alignment: Alignment.centerRight,
                       child: Text(
-                        "24 October, 2022",
-                        style: TextStyle(
+                        // "24 October, 2022",
+                        DateFormat("d MMM, yyy").format(DateTime.now()),
+                        style: const TextStyle(
                           fontSize: 16,
-                          fontWeight: FontWeight.w300,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
