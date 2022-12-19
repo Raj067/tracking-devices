@@ -1,21 +1,23 @@
 class TypesDevices {
   String name;
+  String id;
   TypesDevices({
     required this.name,
+    required this.id,
   });
 }
 
 List<TypesDevices> allTypesDevices = [
   TypesDevices(
-    name: "SMS query status",
+    name: "STS",
+    id: "1",
   ),
   TypesDevices(
-    name: "Check version",
+    name: "CARGO",
+    id: "2",
   ),
   TypesDevices(
-    name: "Query authorized number",
-  ),
-  TypesDevices(
-    name: "Unlock device",
+    name: "FUEL",
+    id: "3",
   ),
 ];
