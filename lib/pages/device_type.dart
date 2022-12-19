@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:intl/intl.dart';
+import 'package:line_icons/line_icons.dart';
 
 import '../backend/models/types.dart';
 import 'select_action.dart';
@@ -29,7 +31,53 @@ class DevicesTypeList extends StatelessWidget {
       //   ],
       // ),
       backgroundColor: Theme.of(context).cardColor,
-      // bottomNavigationBar: ,
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 10,
+              color: Colors.black.withOpacity(.1),
+            )
+          ],
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+            child: GNav(
+              rippleColor: Colors.blue[300]!,
+              hoverColor: Colors.blue[100]!,
+              gap: 8,
+              activeColor: Colors.blue,
+              iconSize: 24,
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              duration: const Duration(milliseconds: 400),
+              tabBackgroundColor: Colors.blue[50]!,
+              color: Colors.black,
+              tabs: const [
+                GButton(
+                  icon: LineIcons.home,
+                  text: 'Home',
+                ),
+                GButton(
+                  icon: LineIcons.syncIcon,
+                  text: 'Syncronize',
+                ),
+                GButton(
+                  icon: LineIcons.user,
+                  text: 'Profile',
+                ),
+              ],
+              // selectedIndex: _selectedIndex,
+              onTabChange: (index) {
+                // setState(() {
+                //   _selectedIndex = index;
+                // });
+              },
+            ),
+          ),
+        ),
+      ),
       body: Column(
         children: [
           const SizedBox(height: 50),

@@ -37,6 +37,8 @@ dependencies:
   telephony: ^0.2.0
   intl: ^0.18.0
   flutter_launcher_icons: ^0.11.0
+  google_nav_bar: ^5.0.6
+  line_icons: ^2.0.1
 
 dev_dependencies:
   flutter_test:
