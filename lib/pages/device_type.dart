@@ -6,7 +6,7 @@ import 'package:line_icons/line_icons.dart';
 
 import '../backend/models/types.dart';
 import 'home/profile.dart';
-import 'home/syncronize.dart';
+// import 'home/syncronize.dart';
 import 'select_action.dart';
 // import 'settings.dart';
 
@@ -21,7 +21,7 @@ class _DevicesTypeListState extends State<DevicesTypeList> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     MainHome(),
-    SyncronizePage(),
+    // SyncronizePage(),
     ProfilePage(),
   ];
   @override
@@ -56,10 +56,10 @@ class _DevicesTypeListState extends State<DevicesTypeList> {
                   icon: LineIcons.home,
                   text: 'Home',
                 ),
-                GButton(
-                  icon: LineIcons.syncIcon,
-                  text: 'Syncronize',
-                ),
+                // GButton(
+                //   icon: LineIcons.syncIcon,
+                //   text: 'Syncronize',
+                // ),
                 GButton(
                   icon: LineIcons.user,
                   text: 'Profile',

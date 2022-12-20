@@ -1,10 +1,11 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:project/pages/api.dart';
 
 import '../backend/controllers/controller_home.dart';
+import 'device_type.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -23,8 +24,8 @@ class _LoginState extends State<Login> {
       appBar: AppBar(
         elevation: 0,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+      body: ListView(
+        // crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
             height: 150,
@@ -57,7 +58,15 @@ class _LoginState extends State<Login> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              const Center(child: Text("Let's Login")),
+                              const Center(
+                                child: Text(
+                                  "Let's Login",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
                               TextFormField(
                                 decoration: const InputDecoration(
                                   hintText: 'Username',
@@ -88,10 +97,14 @@ class _LoginState extends State<Login> {
                               ),
                               ElevatedButton(
                                 onPressed: () {
-                                  if (loginKey.currentState!.validate()) {}
                                   // Get.to(
                                   //   const DevicesTypeList(),
                                   // );
+                                  if (loginKey.currentState!.validate()) {
+                                    Get.to(
+                                      const DevicesTypeList(),
+                                    );
+                                  }
                                 },
                                 child: const Text("Login"),
                               ),

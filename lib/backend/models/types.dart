@@ -9,7 +9,7 @@ class TypesDevices {
 
 List<TypesDevices> allTypesDevices = [
   TypesDevices(
-    name: "STS",
+    name: "ECTS",
     id: "1",
   ),
   TypesDevices(
