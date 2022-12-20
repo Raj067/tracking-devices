@@ -97,13 +97,8 @@ class _LoginState extends State<Login> {
                               ),
                               ElevatedButton(
                                 onPressed: () {
-                                  // Get.to(
-                                  //   const DevicesTypeList(),
-                                  // );
                                   if (loginKey.currentState!.validate()) {
-                                    Get.to(
-                                      const DevicesTypeList(),
-                                    );
+                                    loginUser();
                                   }
                                 },
                                 child: const Text("Login"),
@@ -123,7 +118,7 @@ class _LoginState extends State<Login> {
     );
   }
 
-  loginUser(BuildContext context) async {
+  loginUser() async {
     Get.isSnackbarOpen ? Get.closeCurrentSnackbar() : true;
     Get.snackbar(
       "Please Wait",
@@ -134,10 +129,12 @@ class _LoginState extends State<Login> {
       snackPosition: SnackPosition.BOTTOM,
       showProgressIndicator: true,
       dismissDirection: DismissDirection.horizontal,
+      margin: const EdgeInsets.all(0),
+      borderRadius: 0,
     );
     try {
       final response = await http.post(
-        Uri.parse('${baseUrl}api/token/'),
+        Uri.parse(loginUrl),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -150,7 +147,11 @@ class _LoginState extends State<Login> {
         // Create storage
         final controller = Get.put(HomeController());
         Map tokens = jsonDecode(response.body);
-        controller.token = tokens['access'];
+        controller.token.value = tokens['access'];
+        Get.isSnackbarOpen ? Get.closeCurrentSnackbar() : true;
+        Get.to(
+          const DevicesTypeList(),
+        );
       } else if (response.statusCode == 401) {
         Get.isSnackbarOpen ? Get.closeCurrentSnackbar() : true;
         Get.snackbar(
@@ -159,6 +160,8 @@ class _LoginState extends State<Login> {
           backgroundColor: Colors.red.withAlpha(50),
           snackPosition: SnackPosition.BOTTOM,
           dismissDirection: DismissDirection.horizontal,
+          margin: const EdgeInsets.all(0),
+          borderRadius: 0,
         );
       }
     } catch (e) {
@@ -169,6 +172,8 @@ class _LoginState extends State<Login> {
         backgroundColor: Colors.red.withAlpha(50),
         snackPosition: SnackPosition.BOTTOM,
         dismissDirection: DismissDirection.horizontal,
+        margin: const EdgeInsets.all(0),
+        borderRadius: 0,
       );
     }
   }

@@ -1,14 +1,19 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:intl/intl.dart';
 import 'package:line_icons/line_icons.dart';
 
+import '../backend/controllers/controller_home.dart';
 import '../backend/models/types.dart';
+import 'api.dart';
 import 'home/profile.dart';
 // import 'home/syncronize.dart';
 import 'select_action.dart';
 // import 'settings.dart';
+import 'package:http/http.dart' as http;
 
 class DevicesTypeList extends StatefulWidget {
   const DevicesTypeList({Key? key}) : super(key: key);
@@ -80,8 +85,41 @@ class _DevicesTypeListState extends State<DevicesTypeList> {
   }
 }
 
-class MainHome extends StatelessWidget {
+class MainHome extends StatefulWidget {
   const MainHome({Key? key}) : super(key: key);
+
+  @override
+  State<MainHome> createState() => _MainHomeState();
+}
+
+class _MainHomeState extends State<MainHome> {
+  List<TypesDevices> allTypesDevices = [];
+  final controller = Get.put(HomeController());
+  bool isError = false;
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  fetchData() async {
+    try {
+      var response = await http.get(
+        Uri.parse(deviceTypeUrl),
+        headers: getAuthHeaders(controller.token.value),
+      );
+      List<TypesDevices> allTypes = [];
+      // print(jsonDecode(response.body));
+      for (var dx in jsonDecode(response.body)) {
+        allTypes.add(fromJsonTypesDevices(dx));
+      }
+      allTypesDevices = allTypes;
+    } catch (e) {
+      isError = true;
+    }
+
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -137,33 +175,48 @@ class MainHome extends StatelessWidget {
             ),
           ),
         ),
-        Expanded(
-          child: ListView.builder(
-            padding: const EdgeInsets.fromLTRB(30, 0, 30, 5),
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-                child: ListTile(
-                  title: Text(
-                    allTypesDevices[index].name,
-                  ),
-                  tileColor: Theme.of(context).primaryColor.withAlpha(50),
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(20),
+        allTypesDevices.isEmpty && !isError
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : isError
+                ? TextButton(
+                    onPressed: () {
+                      setState(() {
+                        isError = false;
+                      });
+                      fetchData();
+                    },
+                    child: const Text("Network error: Reload"),
+                  )
+                : Expanded(
+                    child: ListView.builder(
+                      padding: const EdgeInsets.fromLTRB(30, 0, 30, 5),
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                          child: ListTile(
+                            title: Text(
+                              allTypesDevices[index].name,
+                            ),
+                            tileColor:
+                                Theme.of(context).primaryColor.withAlpha(50),
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(20),
+                              ),
+                            ),
+                            onTap: () {
+                              Get.to(SelectActions(
+                                deviceType: allTypesDevices[index],
+                              ));
+                            },
+                          ),
+                        );
+                      },
+                      itemCount: allTypesDevices.length,
                     ),
                   ),
-                  onTap: () {
-                    Get.to(SelectActions(
-                      deviceType: allTypesDevices[index],
-                    ));
-                  },
-                ),
-              );
-            },
-            itemCount: allTypesDevices.length,
-          ),
-        ),
       ],
     );
   }

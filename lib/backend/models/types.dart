@@ -7,6 +7,13 @@ class TypesDevices {
   });
 }
 
+TypesDevices fromJsonTypesDevices(Map<String, dynamic> e) {
+  return TypesDevices(
+    id: e['id'],
+    name: e['device_type'],
+  );
+}
+
 List<TypesDevices> allTypesDevices = [
   TypesDevices(
     name: "ECTS",

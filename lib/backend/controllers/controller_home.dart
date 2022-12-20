@@ -1,21 +1,14 @@
 import 'package:get/get.dart';
-
 import '../models/devices.dart';
 
 class HomeController extends GetxController {
   RxList<Devices> devices = <Devices>[].obs;
+
   var token = "".obs;
   @override
   void onInit() {
     super.onInit();
     devices = listDevices.obs;
-    // devices = List<Devices>.generate(
-    //   1000,
-    //   (index) => Devices(
-    //     device: 'Device name $index',
-    //     id: index,
-    //   ),
-    // ).obs;
   }
 
   void search(String val) {
