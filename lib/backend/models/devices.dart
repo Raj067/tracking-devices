@@ -1,6 +1,6 @@
 class Devices {
   String phone;
-  int device;
+  String device;
   String deviceTypeId;
   Devices({
     required this.device,

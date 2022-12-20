@@ -42,7 +42,7 @@ class _DevicesListState extends State<DevicesList> {
         headers: getAuthHeaders(controller.token.value),
       );
       List<Devices> allTypes = [];
-      print(jsonDecode(response.body));
+      // print(jsonDecode(response.body));
       for (var dx in jsonDecode(response.body)) {
         allTypes.add(fromJsonDevices(dx));
       }
@@ -87,7 +87,10 @@ class _DevicesListState extends State<DevicesList> {
                         );
                       },
                       title: Text(
-                        "${listDevices[index].device}",
+                        listDevices[index].device,
+                      ),
+                      subtitle: Text(
+                        widget.deviceType.name,
                       ),
                     );
                   },
