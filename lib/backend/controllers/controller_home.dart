@@ -4,7 +4,7 @@ import '../models/devices.dart';
 
 class HomeController extends GetxController {
   RxList<Devices> devices = <Devices>[].obs;
-
+  var token = "".obs;
   @override
   void onInit() {
     super.onInit();

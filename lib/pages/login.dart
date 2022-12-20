@@ -1,12 +1,22 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project/pages/api.dart';
 
-import 'device_type.dart';
-// import 'homepage.dart';
+import '../backend/controllers/controller_home.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
 
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  final loginKey = GlobalKey<FormState>();
+  TextEditingController username = TextEditingController();
+  TextEditingController password = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,33 +52,51 @@ class Login extends StatelessWidget {
                       // margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                       child: Padding(
                         padding: const EdgeInsets.all(20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            const Center(child: Text("Let's Login")),
-                            TextFormField(
-                              decoration: const InputDecoration(
-                                hintText: 'Username',
+                        child: Form(
+                          key: loginKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              const Center(child: Text("Let's Login")),
+                              TextFormField(
+                                decoration: const InputDecoration(
+                                  hintText: 'Username',
+                                ),
+                                controller: username,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return "This field is required";
+                                  }
+                                  return null;
+                                },
                               ),
-                            ),
-                            TextFormField(
-                              obscureText: true,
-                              decoration: const InputDecoration(
-                                hintText: 'Password',
+                              TextFormField(
+                                obscureText: true,
+                                decoration: const InputDecoration(
+                                  hintText: 'Password',
+                                ),
+                                controller: password,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return "This field is required";
+                                  }
+                                  return null;
+                                },
                               ),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                Get.to(
-                                  const DevicesTypeList(),
-                                );
-                              },
-                              child: const Text("Login"),
-                            ),
-                          ],
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              ElevatedButton(
+                                onPressed: () {
+                                  if (loginKey.currentState!.validate()) {}
+                                  // Get.to(
+                                  //   const DevicesTypeList(),
+                                  // );
+                                },
+                                child: const Text("Login"),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -80,5 +108,55 @@ class Login extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  loginUser(BuildContext context) async {
+    Get.isSnackbarOpen ? Get.closeCurrentSnackbar() : true;
+    Get.snackbar(
+      "Please Wait",
+      "Loading ...",
+      duration: const Duration(minutes: 5),
+      // ignore: use_build_context_synchronously
+      backgroundColor: Theme.of(context).primaryColor.withAlpha(50),
+      snackPosition: SnackPosition.BOTTOM,
+      showProgressIndicator: true,
+      dismissDirection: DismissDirection.horizontal,
+    );
+    try {
+      final response = await http.post(
+        Uri.parse('${baseUrl}api/token/'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, dynamic>{
+          'username': username.text,
+          'password': password.text,
+        }),
+      );
+      if (response.statusCode == 200) {
+        // Create storage
+        final controller = Get.put(HomeController());
+        Map tokens = jsonDecode(response.body);
+        controller.token = tokens['access'];
+      } else if (response.statusCode == 401) {
+        Get.isSnackbarOpen ? Get.closeCurrentSnackbar() : true;
+        Get.snackbar(
+          "Login error",
+          "Username or password is not correct",
+          backgroundColor: Colors.red.withAlpha(50),
+          snackPosition: SnackPosition.BOTTOM,
+          dismissDirection: DismissDirection.horizontal,
+        );
+      }
+    } catch (e) {
+      Get.isSnackbarOpen ? Get.closeCurrentSnackbar() : true;
+      Get.snackbar(
+        "Network error",
+        "Check your network connection",
+        backgroundColor: Colors.red.withAlpha(50),
+        snackPosition: SnackPosition.BOTTOM,
+        dismissDirection: DismissDirection.horizontal,
+      );
+    }
   }
 }
