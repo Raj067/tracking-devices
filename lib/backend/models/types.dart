@@ -14,17 +14,17 @@ TypesDevices fromJsonTypesDevices(Map<String, dynamic> e) {
   );
 }
 
-List<TypesDevices> allTypesDevices = [
-  TypesDevices(
-    name: "ECTS",
-    id: "1",
-  ),
-  TypesDevices(
-    name: "CARGO",
-    id: "2",
-  ),
-  TypesDevices(
-    name: "FUEL",
-    id: "3",
-  ),
-];
+// List<TypesDevices> allTypesDevices = [
+//   TypesDevices(
+//     name: "ECTS",
+//     id: "1",
+//   ),
+//   TypesDevices(
+//     name: "CARGO",
+//     id: "2",
+//   ),
+//   TypesDevices(
+//     name: "FUEL",
+//     id: "3",
+//   ),
+// ];

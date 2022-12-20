@@ -5,11 +5,11 @@ class HomeController extends GetxController {
   RxList<Devices> devices = <Devices>[].obs;
 
   var token = "".obs;
-  @override
-  void onInit() {
-    super.onInit();
-    devices = listDevices.obs;
-  }
+  // @override
+  // void onInit() {
+  //   super.onInit();
+  //   // devices = listDevices.obs;
+  // }
 
   void search(String val) {
     List filteredList = [];

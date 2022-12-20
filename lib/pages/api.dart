@@ -11,3 +11,7 @@ Map<String, String> getAuthHeaders(String accessToken) {
 const loginUrl = "${baseUrl}token-auth/";
 
 const deviceTypeUrl = "${baseUrl}get-device-types/";
+
+const actionUrl = "${baseUrl}get-possible-actions/";
+
+// get-possible-actions/
