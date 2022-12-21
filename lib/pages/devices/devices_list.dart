@@ -38,7 +38,7 @@ class _DevicesListState extends State<DevicesList> {
   fetchData() async {
     try {
       var response = await http.get(
-        Uri.parse("${baseUrl}get-devices/"),
+        Uri.parse("${baseUrl}get-devices/${widget.deviceType.id}/"),
         headers: getAuthHeaders(controller.token.value),
       );
       List<Devices> allTypes = [];
