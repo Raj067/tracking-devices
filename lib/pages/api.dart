@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:8000/api/";
+const baseUrl = "http://139.144.187.18/api/";
 
 Map<String, String> getAuthHeaders(String accessToken) {
   Map<String, String> authHeaders = {

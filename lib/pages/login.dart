@@ -144,6 +144,8 @@ class _LoginState extends State<Login> {
         }),
       );
       if (response.statusCode == 200) {
+        username.text = "";
+        password.text = "";
         // Create storage
         final controller = Get.put(HomeController());
         Map tokens = jsonDecode(response.body);
